@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First name:</b>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @user.gender %>
+</p>
+
+<p>
+  <b>Dob:</b>
+  <%= @user.dob %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>Education degree:</b>
+  <%= @user.education_degree %>
+</p>
+
+<p>
+  <b>Graduate:</b>
+  <%= @user.graduate %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @user.year %>
+</p>
+
+<p>
+  <b>Is passed:</b>
+  <%= @user.is_passed %>
+</p>
+
+<p>
+  <b>Salary:</b>
+  <%= @user.salary %>
+</p>
+
+<p>
+  <b>About me:</b>
+  <%= @user.about_me %>
+</p>
+
+<p>
+  <b>Accept terms:</b>
+  <%= @user.accept_terms %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
