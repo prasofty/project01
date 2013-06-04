@@ -1,15 +1,24 @@
+class MyValidator < ActiveModel::Validator
+  def validate(record)
+    if record.first_name.starts_with? 'X'
+      record.errors[:first_name] << 'first name not start with X'
+    end
+  end
+end
+
+
 class User < ActiveRecord::Base
   attr_accessible :about_me, :accept_terms, :dob, :education_degree, :email, :first_name, :gender, :graduate, :is_passed, :last_name, :salary, :year,
                   :email_confirmation
 
   validates :first_name, :presence => true
-  validates :last_name, :presence => true
+  validates :last_name, :presence => true#, :if => :validate_last_name?, :unless
 
   validates :email, :uniqueness => true, :allow_blank => true
   validates :email, :confirmation => true
   validates :email_confirmation, :presence => true
 
-  validates :accept_terms, :acceptance => {:accept => true}
+  validates :accept_terms, :acceptance => {:accept => true}, :on => :create
 
   validates :first_name, :format => { :with => /\A[a-zA-Z]+\z/,
                                       :message => "Only letters allowed" }
@@ -34,5 +43,10 @@ class User < ActiveRecord::Base
   validates :graduate, :exclusion => { :in => %w(ssc inter),
                                        :message => "%{value} not accept graduate." }
 
+  validates_with MyValidator
 
+
+  def validate_last_name?
+    false
+  end
 end
