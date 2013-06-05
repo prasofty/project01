@@ -6,15 +6,32 @@ class MyValidator < ActiveModel::Validator
   end
 end
 
+class EmailValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      record.errors[attribute] << (options[:message] || "is not an email")
+    end
+  end
+end
+
+class AmountValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    if value == 2345
+      record.errors[attribute] << (options[:message] || "dont enter 2345")
+    end
+  end
+end
+
 
 class User < ActiveRecord::Base
-  include ActiveModel::Validations
+  #include ActiveModel::Validations
   attr_accessible :about_me, :accept_terms, :dob, :education_degree, :email, :first_name, :gender, :graduate, :is_passed, :last_name, :salary, :year,
                   :email_confirmation
 
   validates :first_name, :presence => true
   validates :last_name, :presence => true#, :if => :validate_last_name?, :unless
 
+  validates :email, :presence => true, :email => true
   validates :email, :uniqueness => true, :allow_blank => true
   validates :email, :confirmation => true
   validates :email_confirmation, :presence => true
@@ -36,7 +53,7 @@ class User < ActiveRecord::Base
   }
 
   #validates :salary, :numericality => true
-  validates :salary, :numericality => { :only_integer => true, :greater_than => 2000}
+  validates :salary, :numericality => { :only_integer => true, :greater_than => 2000}, :amount => true
 
   validates :gender, :inclusion => { :in => %w(male female),
                                      :message => "%{value} is not a gender" }
@@ -44,7 +61,7 @@ class User < ActiveRecord::Base
   validates :graduate, :exclusion => { :in => %w(ssc inter),
                                        :message => "%{value} not accept graduate." }
 
-  validates_with MyValidator
+  #validates_with MyValidator
 
 
   def validate_last_name?
