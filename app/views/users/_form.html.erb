@@ -1,70 +1,84 @@
 <%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :first_name %>
+      <br/>
+      <%= f.text_field :first_name %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :dob %><br />
-    <%= f.date_select :dob %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :email_confirmation %><br />
-    <%= f.text_field :email_confirmation %>
-  </div>
-  <div class="field">
-    <%= f.label :education_degree %><br />
-    <%= f.text_field :education_degree %>
-  </div>
-  <div class="field">
-    <%= f.label :graduate %><br />
-    <%= f.text_field :graduate %>
-  </div>
-  <div class="field">
-    <%= f.label :year %><br />
-    <%= f.number_field :year %>
-  </div>
-  <div class="field">
-    <%= f.label :is_passed %><br />
-    <%= f.check_box :is_passed %>
-  </div>
-  <div class="field">
-    <%= f.label :salary %><br />
-    <%= f.text_field :salary %>
-  </div>
-  <div class="field">
-    <%= f.label :about_me %><br />
-    <%= f.text_area :about_me %>
-  </div>
-  <div class="field">
-    <p>This is some terms and conditions before create</p>
-    <br />
-    <%= f.check_box :accept_terms %><%= f.label :accept_terms %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :last_name %>
+      <br/>
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="field">
+      <%= f.label :gender %>
+      <br/>
+      <%= f.text_field :gender %>
+    </div>
+    <div class="field">
+      <%= f.label :dob %>
+      <br/>
+      <%= f.date_select :dob %>
+    </div>
+    <div class="field">
+      <%= f.label :email %>
+      <br/>
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :email_confirmation %>
+      <br/>
+      <%= f.text_field :email_confirmation %>
+    </div>
+    <div class="field">
+      <%= f.label :education_degree %>
+      <br/>
+      <%= f.text_field :education_degree %>
+    </div>
+    <div class="field">
+      <%= f.label :graduate %>
+      <br/>
+      <%= f.text_field :graduate %>
+    </div>
+    <div class="field">
+      <%= f.label :year %>
+      <br/>
+      <%= f.number_field :year %>
+    </div>
+    <div class="field">
+      <%= f.label :is_passed %>
+      <br/>
+      <%= f.check_box :is_passed %>
+    </div>
+    <div class="field">
+      <%= f.label :salary %>
+      <br/>
+      <%= f.text_field :salary %>
+    </div>
+    <div class="field">
+      <%= f.label :about_me %>
+      <br/>
+      <%= f.text_area :about_me %>
+    </div>
+    <% if @user.new_record? %>
+        <div class="field">
+          <p>This is some terms and conditions before create</p>
+          <br/>
+          <%= f.check_box :accept_terms %><%= f.label :accept_terms %>
+        </div>
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

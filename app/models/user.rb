@@ -1,13 +1,14 @@
 class MyValidator < ActiveModel::Validator
   def validate(record)
-    if record.first_name.starts_with? 'X'
-      record.errors[:first_name] << 'first name not start with X'
+    if record.first_name.starts_with? 'x'
+      record.errors[:first_name] << 'dont starting with x please!'
     end
   end
 end
 
 
 class User < ActiveRecord::Base
+  include ActiveModel::Validations
   attr_accessible :about_me, :accept_terms, :dob, :education_degree, :email, :first_name, :gender, :graduate, :is_passed, :last_name, :salary, :year,
                   :email_confirmation
 
