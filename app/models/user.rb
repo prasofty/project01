@@ -63,8 +63,20 @@ class User < ActiveRecord::Base
 
   #validates_with MyValidator
 
+  validate :birth_date_validator
+
+  before_save :calculate_age
 
   def validate_last_name?
     false
+  end
+
+  def birth_date_validator
+    errors.add(:dob, 'should not future date')
+  end
+
+  def calculate_age
+    age = (Date.today - self.dob) / 365.25
+    puts age
   end
 end
